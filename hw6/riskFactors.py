@@ -10,15 +10,24 @@ def openfile(file_name):
         return ls
     except FileNotFoundError:
         print("Cannot find file " + file_name)
+def punctuation_test(value):
+    punct = list(string.punctuation)
+    placeholder = ""
+    if value[-1] == punct:
+        placeholder = str(value[:-1])
+        placeholder = float(placeholder[:-1])
+    else:
+        placeholder = value
+    print(placeholder)
+    print(value[:-1])
+    return placeholder
 def find_min(file_name, num):
     min_num = 99999999
     min_num_state = ""
-    punct = list(string.punctuation)
     for i in file_name[2:]:
         placeholder1 = i[num]
-        if placeholder1[-1] == punct:
-            placeholder1 = placeholder1[:-1]
-        int1 = float(placeholder1)
+        placeholder = punctuation_test(placeholder1)
+        int1 = float(placeholder)
         str2 = i[0]
         if int1 < min_num:
             min_num = int1
@@ -38,12 +47,12 @@ def find_Max(file_name, num):
 filename = input("Enter filename containing csv data: ")
 Name = openfile(filename)
 
-one, two = find_min(Name, 11)
+num, state = find_min(Name, 11)
 print(one)
 print(two)
-one, two = find_Max(Name, 11)
-print(one)
-print(two)
+#one, two = find_Max(Name, 11)
+#print(one)
+#print(two)
 #print(Name[0])
 #print(Name[1][1])
 #print(Name[1][5])
